@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 21, 2014 9:51:39 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.ihsinformatics.is3web.model.Answer" table="answer">
+        <composite-id name="id" class="com.ihsinformatics.is3web.model.AnswerId">
+            <key-property name="surveyId" type="int">
+                <column name="survey_id" />
+            </key-property>
+            <key-property name="questionId" type="int">
+                <column name="question_id" />
+            </key-property>
+            <key-property name="answerId" type="int">
+                <column name="answer_id" />
+            </key-property>
+        </composite-id>
+        <property name="answer" type="string">
+            <column name="answer" />
+        </property>
+        <property name="reply" type="string">
+            <column name="reply" />
+        </property>
+        <property name="nextQuestionId" type="java.lang.Integer">
+            <column name="next_question_id" />
+        </property>
+        <property name="resetsSurvey" type="java.lang.Boolean">
+            <column name="resets_survey" />
+        </property>
+        <property name="endsSurvey" type="java.lang.Boolean">
+            <column name="ends_survey" />
+        </property>
+        <property name="uuid" type="string">
+            <column name="uuid" length="38" />
+        </property>
+    </class>
+</hibernate-mapping>

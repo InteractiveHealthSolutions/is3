@@ -1,0 +1,3 @@
+# Module is3web
+# RPC service class, partial path of RPC policy file
+com.ihsinformatics.is3web.client.ServerService, 9CD722E8B701416CED71FDCBF1B74D61.gwt.rpc

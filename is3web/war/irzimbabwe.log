@@ -1,0 +1,3 @@
+WARN qtp659490540-27 org.hibernate.util.JDBCExceptionReporter - SQL Error: 1064, SQLState: 42000
+ ERROR qtp659490540-27 org.hibernate.util.JDBCExceptionReporter - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and transaction.answer='X' or transaction.answer='x'  	   group by participant.p' at line 1
+ 

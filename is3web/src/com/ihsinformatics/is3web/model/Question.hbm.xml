@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 21, 2014 9:51:39 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.ihsinformatics.is3web.model.Question" table="question">
+        <composite-id name="id" class="com.ihsinformatics.is3web.model.QuestionId">
+            <key-property name="surveyId" type="int">
+                <column name="survey_id" />
+            </key-property>
+            <key-property name="questionId" type="int">
+                <column name="question_id" />
+            </key-property>
+        </composite-id>
+        <property name="questionText" type="string">
+            <column name="question_text" />
+        </property>
+        <property name="answerPattern" type="string">
+            <column name="answer_pattern" />
+        </property>
+        <property name="uuid" type="string">
+            <column name="uuid" length="38" />
+        </property>
+    </class>
+</hibernate-mapping>

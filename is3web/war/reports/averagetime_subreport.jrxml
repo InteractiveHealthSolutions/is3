@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report3_subreport1" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="f3cabc59-1ccc-4659-80cc-ad73140c95f9">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="surveyID" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select *,TIMESTAMPDIFF(second,min(date_created), max(date_answered) )/(select count(question_id)  from question where survey_id=$P{surveyID}) as average
+from transaction inner join participant using (participant_id)where survey_id=$P{surveyID} and date_answered is  not null group by participant_id
+;]]>
+	</queryString>
+	<field name="participant_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="transaction_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="survey_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="question_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="answer" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="date_created" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="date_answered" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="contact_no" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="participant_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="date_registered" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="is_blacklisted" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="uuid" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="average" class="java.math.BigDecimal"/>
+	<variable name="sum" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{average}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="noOfParticipants" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{participant_id}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="RETURN_VALUE" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{sum}/$V{noOfParticipants}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="2d61c457-4af3-4e2d-9e53-2f80d9495279" x="0" y="0" width="100" height="20"/>
+				<textElement>
+					<font isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Participant Id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2d61c457-4af3-4e2d-9e53-2f80d9495279" x="200" y="0" width="100" height="20"/>
+				<textElement>
+					<font isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Participant Id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="47902f62-8784-4af6-82e0-0f4314cb326c" x="300" y="0" width="100" height="20"/>
+				<textElement>
+					<font isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Average]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2d61c457-4af3-4e2d-9e53-2f80d9495279" x="100" y="0" width="100" height="20"/>
+				<textElement>
+					<font isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Participant Name]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement uuid="a7206c0d-b333-4025-b3e6-2cea96646652" x="0" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{participant_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e9819fd9-e96f-4d9c-bb97-c3306f67f362" x="100" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{participant_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7362123d-41a5-4248-8fa1-ce344f6992af" x="200" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{surveyID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c0ef2dd0-cb38-4bc8-be6e-a4d4d165cbb5" x="300" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{average}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="20">
+			<staticText>
+				<reportElement uuid="e3fca18a-be83-4b29-9b19-4310022a6353" x="200" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Survey Average :]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="e7bcfd92-e023-458c-b628-549766545856" x="300" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{RETURN_VALUE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>

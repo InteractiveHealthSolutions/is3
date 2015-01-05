@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="transactionTimecheck" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0e1262ce-daf2-42b1-835f-9bc8eed4d77c">
+	<property name="ireport.zoom" value="1.4641000000000013"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="style1">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{PAGE_COUNT}.intValue()%2 == 0)]]></conditionExpression>
+			<style mode="Opaque" forecolor="#FFFFFF" backcolor="#87CEFA"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[select * from transaction  inner join survey    using (survey_id) inner join participant  using(participant_id)inner join question  on question.question_id=transaction.question_id    and question.survey_id=transaction.survey_id
+inner join answer on answer.survey_id=transaction.survey_id and answer.question_id=transaction.question_id
+ where transaction.date_answered is null and TIMESTAMPDIFF(hour,transaction.date_created, now()) >24  order by participant.participant_id ;]]>
+	</queryString>
+	<field name="participant_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="survey_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="transaction_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="question_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="answer" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="date_created" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="date_answered" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="survey_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="surveyer" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="date_start" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="date_expire" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="is_expired" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="init_text" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="uuid" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="contact_no" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="participant_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="date_registered" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="is_blacklisted" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="question_text" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="answer_pattern" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="answer_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="reply" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="next_question_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="resets_survey" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ends_survey" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="surveyGroup">
+		<groupExpression><![CDATA[$F{survey_id}]]></groupExpression>
+		<groupHeader>
+			<band height="63">
+				<staticText>
+					<reportElement uuid="54c8e501-460c-4fbb-9631-22eb762a528d" x="0" y="37" width="100" height="20"/>
+					<textElement>
+						<font size="14" isBold="true" isItalic="true" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[Participant ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="54c8e501-460c-4fbb-9631-22eb762a528d" x="230" y="37" width="100" height="20"/>
+					<textElement>
+						<font size="14" isBold="true" isItalic="true" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[Question]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="54c8e501-460c-4fbb-9631-22eb762a528d" x="455" y="37" width="100" height="20"/>
+					<textElement>
+						<font size="14" isBold="true" isItalic="true" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[Date Created]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="54c8e501-460c-4fbb-9631-22eb762a528d" x="309" y="0" width="78" height="20"/>
+					<textElement>
+						<font size="14" isBold="true" isItalic="true" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[Surveyer :]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="e944e89b-4ef2-45d8-95bd-ab0ac0386a9e" x="131" y="0" width="179" height="20"/>
+					<textElement>
+						<font size="14" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{survey_name}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="dc089a9d-7aa3-4cd6-8419-70fd2bdc376b" x="385" y="0" width="148" height="20"/>
+					<textElement>
+						<font size="14" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{surveyer}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="54c8e501-460c-4fbb-9631-22eb762a528d" x="59" y="0" width="72" height="20"/>
+					<textElement>
+						<font size="14" isBold="true" isItalic="true" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[Survey :]]></text>
+				</staticText>
+				<line>
+					<reportElement uuid="7ef36aef-5e15-4b99-9bd1-a21550da2aaf" x="0" y="20" width="555" height="1"/>
+				</line>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="66" splitType="Stretch">
+			<image>
+				<reportElement uuid="83980d74-4932-4a8d-acd3-a9f0082ca706" x="0" y="0" width="100" height="66"/>
+				<imageExpression><![CDATA["C:\\Users\\NewUser\\Desktop\\ihs-logo-100X75.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="95e456b7-b5d7-4b89-a615-f260dbd7074c" x="100" y="11" width="455" height="42" forecolor="#FF8000"/>
+				<textElement>
+					<font fontName="Times New Roman" size="27" isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Transactions Not Answered in 24 Hours]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement uuid="1cf7494b-c5c2-4f70-86a5-7a5ebe1c4047" x="0" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contact_no}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1892b590-ee3b-48ed-9160-53f26972beea" x="111" y="0" width="332" height="34"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{question_text}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1c27b528-81ed-4195-8206-64e1656bc793" x="455" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date_created}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="0b5c09b7-208d-4c03-9cf7-25ddd63ca721" x="0" y="34" width="555" height="1"/>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20">
+			<textField>
+				<reportElement uuid="be14414f-b74c-42a6-9b90-ebb9eaf3c27d" x="455" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="64081322-ae2e-4e49-95c9-cd746be72d68" x="413" y="0" width="42" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Page #]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="20">
+			<textField>
+				<reportElement uuid="291e6936-8fbb-4367-872b-517dd9e9de55" x="100" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{COLUMN_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="2319b52b-3409-45cc-a463-fb1aa992ce59" x="0" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total No :]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="9606edd6-a27c-4485-be8a-2bc7d78fc553" x="455" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="02416495-d75c-40b3-a482-b06bdae9b2f1" x="355" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date Printed :]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

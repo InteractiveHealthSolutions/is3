@@ -1,0 +1,2 @@
+serviceClass: com.ihsinformatics.tbrsmssurveygwt.client.GreetingService
+path: 0CBDACFDCE6A12EF03968B30A85431A1.gwt.rpc

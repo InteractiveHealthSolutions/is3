@@ -1,0 +1,2 @@
+serviceClass: com.ihsinformatics.is3web.client.ServerService
+path: 9CD722E8B701416CED71FDCBF1B74D61.gwt.rpc

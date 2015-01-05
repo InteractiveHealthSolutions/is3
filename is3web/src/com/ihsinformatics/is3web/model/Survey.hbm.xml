@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 21, 2014 9:51:39 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.ihsinformatics.is3web.model.Survey" table="survey">
+        <id name="surveyId" type="java.lang.Integer">
+            <column name="survey_id" />
+            <generator class="identity" />
+        </id>
+        <property name="surveyName" type="string">
+            <column name="survey_name" length="45" not-null="true" unique="true" />
+        </property>
+        <property name="surveyer" type="string">
+            <column name="surveyer" length="45" />
+        </property>
+        <property name="dateStart" type="timestamp">
+            <column name="date_start" length="19" />
+        </property>
+        <property name="dateExpire" type="timestamp">
+            <column name="date_expire" length="19" />
+        </property>
+        <property name="isExpired" type="java.lang.Boolean">
+            <column name="is_expired" />
+        </property>
+        <property name="initText" type="string">
+            <column name="init_text" length="45" not-null="true" unique="true" />
+        </property>
+        <property name="uuid" type="string">
+            <column name="uuid" length="38" />
+        </property>
+    </class>
+</hibernate-mapping>

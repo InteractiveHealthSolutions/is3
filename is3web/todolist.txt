@@ -1,0 +1,6 @@
+To do List:
+
+
+1) change database details in hibernate.cfg.xml
+2) last Report has to be generated (after how many details user leaves survey )
+3) error in generating reports 

@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="diiff" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cd84d42e-7c8d-42f6-a62a-81f1c26bd397">
+	<property name="ireport.zoom" value="1.2100000000000073"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select *,TIMESTAMPDIFF(minute,date_created, date_answered ) as diff from transaction inner join survey using (survey_id) inner join participant using(participant_id)  where date_answered is not null order by participant_id]]>
+	</queryString>
+	<field name="participant_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="survey_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="transaction_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="question_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="answer" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="date_created" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="date_answered" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="survey_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="surveyer" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="date_start" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="date_expire" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="is_expired" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="init_text" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="uuid" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="contact_no" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="participant_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="date_registered" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="is_blacklisted" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="diff" class="java.lang.Long"/>
+	<variable name="sumOfParticipantAverage" class="java.lang.Integer" resetType="Group" resetGroup="survey_id" calculation="Sum">
+		<variableExpression><![CDATA[$V{avgOfParticipant}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="avgOfParticipant" class="java.lang.Integer" resetType="Group" resetGroup="particiapantGroup" calculation="Average">
+		<variableExpression><![CDATA[$F{diff}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="countOfParticipantTransaction" class="java.lang.Integer" resetType="Group" resetGroup="survey_id" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{participant_id}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="sumofaverage" class="java.math.BigDecimal" resetType="Group" resetGroup="survey_id" incrementType="Group" incrementGroup="particiapantGroup" calculation="Sum">
+		<variableExpression><![CDATA[$V{avgOfParticipant}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="averageSurvey" class="java.lang.Double" resetType="Group" resetGroup="survey_id" incrementType="Group" incrementGroup="survey_id" calculation="Average">
+		<variableExpression><![CDATA[$V{sumofaverage}/$V{countOfParticipantTransaction}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<group name="survey_id">
+		<groupExpression><![CDATA[$F{survey_id}]]></groupExpression>
+		<groupHeader>
+			<band height="44">
+				<staticText>
+					<reportElement uuid="898d3e11-f0b2-44b8-982b-e659cd98b833" x="1" y="3" width="81" height="20"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Survey Id   :]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="94391585-fca4-4fa9-a3bc-b7dd76d1f3ab" x="82" y="3" width="81" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{survey_id}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="b1877e56-3524-47dc-9c6f-49dd4e2a5b70" x="257" y="4" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{survey_name}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="755c6f63-e915-4ad0-9094-336475af0a54" x="433" y="4" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{init_text}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="ecd1c990-e697-4386-bceb-17003deeb773" x="257" y="24" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{date_start}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="6af489d4-3598-4981-81e0-3f6ee55df0a4" x="433" y="22" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{date_expire}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="bada5cc3-673b-459d-9167-1840d2829f90" x="163" y="3" width="94" height="20"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Survey Name : ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="858e78a5-09a7-444a-a70f-c20b88f1848e" x="357" y="4" width="76" height="20"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Init Text    :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="ec5faeea-e4bd-46a6-804a-1e9198061c24" x="182" y="22" width="75" height="20"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Start Date :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="c83642d4-83ae-4579-b339-014e0ef4dc0a" x="357" y="24" width="76" height="20"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[End Date  :]]></text>
+				</staticText>
+				<line>
+					<reportElement uuid="3370beaa-a45b-4d7e-95ec-f92db1c43721" x="1" y="42" width="554" height="2"/>
+				</line>
+				<line>
+					<reportElement uuid="104ac412-d6bd-4940-b55f-6e75d634352f" x="1" y="1" width="554" height="1"/>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="20">
+				<textField>
+					<reportElement uuid="2f2e54f0-ee7f-441f-b00f-bc9fbb8cc591" x="455" y="0" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$V{averageSurvey}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="1a19d420-6169-4fca-a12c-0279fb671ee7" x="355" y="0" width="100" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Average Of Survey :]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="particiapantGroup">
+		<groupExpression><![CDATA[$F{participant_id}]]></groupExpression>
+		<groupHeader>
+			<band height="62">
+				<staticText>
+					<reportElement uuid="4e05025b-e790-41c8-8dbf-71d38ac5e751" x="199" y="41" width="100" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Elapsed time]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="d9b5f45d-b851-4e1c-bda5-b0f2cd244293" x="100" y="41" width="100" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Date Answered]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="bb9a036f-b83b-4bd2-89ec-2a2bdeac7c5f" x="1" y="41" width="100" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Date Created]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="cc267337-2387-448b-885a-00cbc6919aef" x="2" y="0" width="100" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Participant Id :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="0ae42db0-4880-4465-8828-7be96d0f3d82" x="146" y="0" width="102" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Participant Name :]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="0201bebc-2178-461c-875c-0e9f8a92ce30" x="247" y="0" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{participant_name}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="4f6005ec-f4b5-4a34-bb1e-f41833985ca2" x="101" y="0" width="47" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{participant_id}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="f3bbc7c7-99b9-4e2c-92d2-a2cbc6dd0ac5" x="394" y="0" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{contact_no}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="99b9e7fa-feaa-4523-96da-53d7e6d54ee4" x="343" y="0" width="50" height="20"/>
+					<textElement>
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Contact :]]></text>
+				</staticText>
+				<line>
+					<reportElement uuid="bd75970c-bd28-4c0c-8fcf-57df2c7013b4" x="2" y="40" width="553" height="1"/>
+				</line>
+				<textField>
+					<reportElement uuid="29911b49-3e7a-4456-b5ca-b1cc74e18f42" x="100" y="20" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{date_registered}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="8ccbc502-ee34-4e32-92d0-ec301cc8674c" x="0" y="20" width="100" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Date Registered :]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="25">
+				<textField evaluationTime="Group" evaluationGroup="particiapantGroup">
+					<reportElement uuid="681111fe-1e70-4026-9235-d6eb3de4b1f0" x="452" y="4" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$V{avgOfParticipant}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="5213ce09-32c6-4117-a176-555270fcbc61" x="327" y="2" width="125" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Average of Participant   :]]></text>
+				</staticText>
+				<line>
+					<reportElement uuid="64571f2d-c457-4db0-9a1b-846d9eb7ea0a" x="2" y="2" width="553" height="1"/>
+				</line>
+				<line>
+					<reportElement uuid="40c86aa0-34e0-4a3f-82ab-1b124aed05bf" x="0" y="22" width="552" height="1"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="45">
+			<staticText>
+				<reportElement uuid="41cd05e5-46ab-4d9b-94a6-c0461f84a54e" x="102" y="0" width="409" height="43"/>
+				<textElement>
+					<font size="26" isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Interactive SMS Survey Service]]></text>
+			</staticText>
+			<image>
+				<reportElement uuid="def4801c-61be-42f3-b15d-86e141ab7145" x="1" y="0" width="99" height="45"/>
+				<imageExpression><![CDATA["IHS Logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="21">
+			<staticText>
+				<reportElement uuid="889de20e-7e63-469e-9867-b2cc65e759d0" x="132" y="0" width="285" height="20" forecolor="#0033FF"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Report of Average Time Duration per Survey]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField pattern="dd-MMM-yyyy hh:mm">
+				<reportElement uuid="e4dd2904-b6ca-4e9e-bc9b-051fea71f892" x="0" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{date_created}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yyyy hh:mm">
+				<reportElement uuid="63e528ff-98c4-4ac0-80df-587e5205f4fe" x="99" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{date_answered}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8821fa2a-219b-4095-b10f-6a79bf25bbe7" x="198" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{diff}>0?$F{diff}+"min(s)":"Floating"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20">
+			<textField>
+				<reportElement uuid="c608a713-916f-4fb6-b830-998276e4dd61" x="457" y="0" width="100" height="20"/>
+				<textElement>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="0ec1d4a2-9b18-474b-90fb-bbd0d39435b8" x="423" y="0" width="34" height="20"/>
+				<textElement>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Page:]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="20">
+			<staticText>
+				<reportElement uuid="43c55364-6897-4301-af11-20d72d2527b3" x="1" y="0" width="78" height="20"/>
+				<textElement>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Total Records:]]></text>
+			</staticText>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement uuid="4c2a2b49-8978-409e-8065-db45b0faf9e0" x="455" y="0" width="100" height="20"/>
+				<textElement>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="731ad8ac-6ebd-4d47-8f5b-d05789fc090b" x="79" y="0" width="40" height="20"/>
+				<textElement>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="69d110ee-ea26-4684-aa4d-115892de1dc5" x="379" y="0" width="76" height="20"/>
+				<textElement>
+					<font isBold="true" isUnderline="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Date Printed:]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>

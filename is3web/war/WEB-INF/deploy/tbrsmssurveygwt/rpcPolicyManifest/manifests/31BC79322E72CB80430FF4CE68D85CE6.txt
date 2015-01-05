@@ -1,0 +1,2 @@
+serviceClass: com.ihsinformatics.tbrsmssurveygwt.client.ServerService
+path: 40DFB8126273C075BE5875EE8E4FCC2A.gwt.rpc

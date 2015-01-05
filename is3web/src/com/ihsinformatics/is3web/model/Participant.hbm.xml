@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 21, 2014 9:51:39 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.ihsinformatics.is3web.model.Participant" table="participant">
+        <id name="participantId" type="java.lang.Integer">
+            <column name="participant_id" />
+            <generator class="identity" />
+        </id>
+        <property name="contactNo" type="string">
+            <column name="contact_no" length="20" not-null="true" />
+        </property>
+        <property name="participantName" type="string">
+            <column name="participant_name" length="45" />
+        </property>
+        <property name="dateRegistered" type="timestamp">
+            <column name="date_registered" length="19" />
+        </property>
+        <property name="isBlacklisted" type="java.lang.Boolean">
+            <column name="is_blacklisted" />
+        </property>
+        <property name="uuid" type="string">
+            <column name="uuid" length="38" />
+        </property>
+    </class>
+</hibernate-mapping>
